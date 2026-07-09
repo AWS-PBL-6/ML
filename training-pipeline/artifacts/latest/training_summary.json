@@ -1,0 +1,744 @@
+{
+  "schemaVersion": "1.0.0",
+  "modelVersion": "ae-proxy-breakage-hybrid-v2",
+  "generatedAt": "2026-07-09T03:47:50+00:00",
+  "sourceCsv": "/Users/mac/Downloads/AE_Damage_Detection_Dataset.csv",
+  "featureNames": [
+    "peakAmplitude",
+    "energy",
+    "durationMs",
+    "riseTimeMs",
+    "dominantFrequencyHz",
+    "temperatureC",
+    "humidityPct",
+    "logEnergy",
+    "energyPerDuration",
+    "riseRatio",
+    "freqXRise",
+    "tempXHumidity"
+  ],
+  "coreClassCounts": {
+    "0": 418,
+    "2": 200
+  },
+  "shadowClassCounts": {
+    "1": 288,
+    "3": 94
+  },
+  "coreCv": {
+    "folds": 5,
+    "seed": 42,
+    "foldMetrics": [
+      {
+        "threshold": 0.5,
+        "accuracy": 0.532258064516129,
+        "precision": 0.3333333333333333,
+        "recall": 0.45,
+        "f1": 0.3829787234042553,
+        "fnr": 0.55,
+        "tp": 18,
+        "tn": 48,
+        "fp": 36,
+        "fn": 22,
+        "rocAuc": 0.5151785714285716,
+        "prAuc": 0.40376627682380994,
+        "fold": 0
+      },
+      {
+        "threshold": 0.5,
+        "accuracy": 0.532258064516129,
+        "precision": 0.29545454545454547,
+        "recall": 0.325,
+        "f1": 0.30952380952380953,
+        "fnr": 0.675,
+        "tp": 13,
+        "tn": 53,
+        "fp": 31,
+        "fn": 27,
+        "rocAuc": 0.4321428571428571,
+        "prAuc": 0.3197080660490724,
+        "fold": 1
+      },
+      {
+        "threshold": 0.5,
+        "accuracy": 0.5967741935483871,
+        "precision": 0.38636363636363635,
+        "recall": 0.425,
+        "f1": 0.40476190476190477,
+        "fnr": 0.575,
+        "tp": 17,
+        "tn": 57,
+        "fp": 27,
+        "fn": 23,
+        "rocAuc": 0.5321428571428571,
+        "prAuc": 0.38098337839150487,
+        "fold": 2
+      },
+      {
+        "threshold": 0.5,
+        "accuracy": 0.5040650406504065,
+        "precision": 0.3157894736842105,
+        "recall": 0.45,
+        "f1": 0.37113402061855666,
+        "fnr": 0.55,
+        "tp": 18,
+        "tn": 44,
+        "fp": 39,
+        "fn": 22,
+        "rocAuc": 0.5174698795180723,
+        "prAuc": 0.33301610950303767,
+        "fold": 3
+      },
+      {
+        "threshold": 0.5,
+        "accuracy": 0.5691056910569106,
+        "precision": 0.3488372093023256,
+        "recall": 0.375,
+        "f1": 0.3614457831325302,
+        "fnr": 0.625,
+        "tp": 15,
+        "tn": 55,
+        "fp": 28,
+        "fn": 25,
+        "rocAuc": 0.49698795180722893,
+        "prAuc": 0.31269280043695064,
+        "fold": 4
+      }
+    ],
+    "metricsAt05": {
+      "threshold": 0.5,
+      "accuracy": 0.5469255663430421,
+      "precision": 0.3347107438016529,
+      "recall": 0.405,
+      "f1": 0.36651583710407243,
+      "fnr": 0.595,
+      "tp": 81,
+      "tn": 257,
+      "fp": 161,
+      "fn": 119,
+      "rocAuc": 0.4985287081339714,
+      "prAuc": 0.3463837067630531
+    }
+  },
+  "warnThreshold": {
+    "value": 0.274258,
+    "negativeQuantile": 0.95
+  },
+  "dangerThreshold": {
+    "value": 0.374258,
+    "recallTarget": 0.9,
+    "metrics": {
+      "threshold": 0.374258,
+      "accuracy": 0.33495145631067963,
+      "precision": 0.3256198347107438,
+      "recall": 0.985,
+      "f1": 0.48944099378881983,
+      "fnr": 0.015,
+      "tp": 197,
+      "tn": 10,
+      "fp": 408,
+      "fn": 3
+    }
+  },
+  "policy": {
+    "warnRelease": 0.174258,
+    "dangerRelease": 0.274258,
+    "highConfidenceDanger": 0.47425799999999996,
+    "oodCautionThreshold": 0.5,
+    "oodBlockDangerThreshold": 0.75,
+    "anomalyCautionThreshold": 0.6,
+    "anomalyBlockNormalThreshold": 0.85,
+    "trend": {
+      "windowSize": 5,
+      "cautionMinWarnHits": 2,
+      "dangerMinDangerHits": 2,
+      "emaAlpha": 0.4
+    },
+    "exampleProbabilities": {
+      "score0.20": {
+        "NORMAL": 0.596,
+        "CAUTION": 0.202,
+        "DANGER": 0.202
+      },
+      "score0.50": {
+        "NORMAL": 0.183,
+        "CAUTION": 0.183,
+        "DANGER": 0.634
+      },
+      "score0.80": {
+        "NORMAL": 0.05,
+        "CAUTION": 0.05,
+        "DANGER": 0.901
+      }
+    }
+  },
+  "shadowSummary": {
+    "1": {
+      "count": 288,
+      "mean": 0.48498109046838334,
+      "min": 0.3469486244835285,
+      "p50": 0.4853118149324602,
+      "p75": 0.5063579612793985,
+      "p95": 0.5337028959763161,
+      "max": 0.5761959569756254,
+      "warnOrAboveRatio": 1.0,
+      "dangerOrAboveRatio": 0.9965277777777778
+    },
+    "3": {
+      "count": 94,
+      "mean": 0.4890312556801146,
+      "min": 0.322361976564124,
+      "p50": 0.4852374995891332,
+      "p75": 0.5113337821655705,
+      "p95": 0.5368030661606258,
+      "max": 0.5498794760858983,
+      "warnOrAboveRatio": 1.0,
+      "dangerOrAboveRatio": 0.9893617021276596
+    }
+  },
+  "selectedConfig": {
+    "featureSetName": "engineered",
+    "featureNames": [
+      "peakAmplitude",
+      "energy",
+      "durationMs",
+      "riseTimeMs",
+      "dominantFrequencyHz",
+      "temperatureC",
+      "humidityPct",
+      "logEnergy",
+      "energyPerDuration",
+      "riseRatio",
+      "freqXRise",
+      "tempXHumidity"
+    ],
+    "hybridParams": {
+      "weightBreakage": 0.6,
+      "weightDangerSimilarity": 0.4,
+      "oodPenalty": 0.3
+    },
+    "sortKey": [
+      1,
+      -0.9912086288416075,
+      0.48944099378881983,
+      0.3463837067630531,
+      0.4985287081339714
+    ],
+    "coreMetricsAt05": {
+      "threshold": 0.5,
+      "accuracy": 0.5469255663430421,
+      "precision": 0.3347107438016529,
+      "recall": 0.405,
+      "f1": 0.36651583710407243,
+      "fnr": 0.595,
+      "tp": 81,
+      "tn": 257,
+      "fp": 161,
+      "fn": 119,
+      "rocAuc": 0.4985287081339714,
+      "prAuc": 0.3463837067630531
+    },
+    "foldMetrics": [
+      {
+        "threshold": 0.5,
+        "accuracy": 0.532258064516129,
+        "precision": 0.3333333333333333,
+        "recall": 0.45,
+        "f1": 0.3829787234042553,
+        "fnr": 0.55,
+        "tp": 18,
+        "tn": 48,
+        "fp": 36,
+        "fn": 22,
+        "rocAuc": 0.5151785714285716,
+        "prAuc": 0.40376627682380994,
+        "fold": 0
+      },
+      {
+        "threshold": 0.5,
+        "accuracy": 0.532258064516129,
+        "precision": 0.29545454545454547,
+        "recall": 0.325,
+        "f1": 0.30952380952380953,
+        "fnr": 0.675,
+        "tp": 13,
+        "tn": 53,
+        "fp": 31,
+        "fn": 27,
+        "rocAuc": 0.4321428571428571,
+        "prAuc": 0.3197080660490724,
+        "fold": 1
+      },
+      {
+        "threshold": 0.5,
+        "accuracy": 0.5967741935483871,
+        "precision": 0.38636363636363635,
+        "recall": 0.425,
+        "f1": 0.40476190476190477,
+        "fnr": 0.575,
+        "tp": 17,
+        "tn": 57,
+        "fp": 27,
+        "fn": 23,
+        "rocAuc": 0.5321428571428571,
+        "prAuc": 0.38098337839150487,
+        "fold": 2
+      },
+      {
+        "threshold": 0.5,
+        "accuracy": 0.5040650406504065,
+        "precision": 0.3157894736842105,
+        "recall": 0.45,
+        "f1": 0.37113402061855666,
+        "fnr": 0.55,
+        "tp": 18,
+        "tn": 44,
+        "fp": 39,
+        "fn": 22,
+        "rocAuc": 0.5174698795180723,
+        "prAuc": 0.33301610950303767,
+        "fold": 3
+      },
+      {
+        "threshold": 0.5,
+        "accuracy": 0.5691056910569106,
+        "precision": 0.3488372093023256,
+        "recall": 0.375,
+        "f1": 0.3614457831325302,
+        "fnr": 0.625,
+        "tp": 15,
+        "tn": 55,
+        "fp": 28,
+        "fn": 25,
+        "rocAuc": 0.49698795180722893,
+        "prAuc": 0.31269280043695064,
+        "fold": 4
+      }
+    ],
+    "warnThreshold": 0.274258,
+    "dangerThreshold": 0.374258,
+    "dangerMetrics": {
+      "threshold": 0.374258,
+      "accuracy": 0.33495145631067963,
+      "precision": 0.3256198347107438,
+      "recall": 0.985,
+      "f1": 0.48944099378881983,
+      "fnr": 0.015,
+      "tp": 197,
+      "tn": 10,
+      "fp": 408,
+      "fn": 3
+    },
+    "shadowSummary": {
+      "1": {
+        "count": 1440,
+        "mean": 0.4850426483853835,
+        "min": 0.31307302930763414,
+        "p50": 0.4856504535951132,
+        "p75": 0.5083666048158358,
+        "p95": 0.5398849949363471,
+        "max": 0.5898186965196872,
+        "warnOrAboveRatio": 1.0,
+        "dangerOrAboveRatio": 0.9930555555555556
+      },
+      "3": {
+        "count": 470,
+        "mean": 0.48824314192245266,
+        "min": 0.3030813589132136,
+        "p50": 0.4888570327133651,
+        "p75": 0.5108333231948261,
+        "p95": 0.5410617522105768,
+        "max": 0.5688432091739517,
+        "warnOrAboveRatio": 1.0,
+        "dangerOrAboveRatio": 0.9893617021276596
+      }
+    },
+    "staticPolicy": {
+      "warnThreshold": 0.274258,
+      "dangerThreshold": 0.374258,
+      "oodCautionThreshold": 0.5,
+      "oodBlockDangerThreshold": 0.75,
+      "highConfidenceDanger": 0.47425799999999996,
+      "positiveDangerRecall": 0.985,
+      "negativeDangerRatio": 0.9760765550239234,
+      "shadowDangerRatio": 0.987434554973822,
+      "shadowCautionOrAboveRatio": 1.0
+    },
+    "shadowDangerMeanRatio": 0.9929447399527187
+  },
+  "featureSearch": {
+    "candidateCount": 12,
+    "topCandidates": [
+      {
+        "featureSetName": "engineered",
+        "hybridParams": {
+          "weightBreakage": 0.6,
+          "weightDangerSimilarity": 0.4,
+          "oodPenalty": 0.3
+        },
+        "prAuc": 0.3463837067630531,
+        "rocAuc": 0.4985287081339714,
+        "dangerRecall": 0.985,
+        "shadowDangerMeanRatio": 0.9912086288416075,
+        "selectionSortKey": [
+          1,
+          -0.9912086288416075,
+          0.48944099378881983,
+          0.3463837067630531,
+          0.4985287081339714
+        ]
+      },
+      {
+        "featureSetName": "baseline",
+        "hybridParams": {
+          "weightBreakage": 0.6,
+          "weightDangerSimilarity": 0.4,
+          "oodPenalty": 0.3
+        },
+        "prAuc": 0.36225288071894346,
+        "rocAuc": 0.5054904306220094,
+        "dangerRecall": 1.0,
+        "shadowDangerMeanRatio": 0.9951167257683216,
+        "selectionSortKey": [
+          1,
+          -0.9951167257683216,
+          0.48959608323133413,
+          0.36225288071894346,
+          0.5054904306220094
+        ]
+      },
+      {
+        "featureSetName": "engineered",
+        "hybridParams": {
+          "weightBreakage": 0.5,
+          "weightDangerSimilarity": 0.5,
+          "oodPenalty": 0.3
+        },
+        "prAuc": 0.3535236379759218,
+        "rocAuc": 0.5055861244019138,
+        "dangerRecall": 0.995,
+        "shadowDangerMeanRatio": 0.995419621749409,
+        "selectionSortKey": [
+          1,
+          -0.995419621749409,
+          0.48954489544895446,
+          0.3535236379759218,
+          0.5055861244019138
+        ]
+      },
+      {
+        "featureSetName": "baseline",
+        "hybridParams": {
+          "weightBreakage": 0.7,
+          "weightDangerSimilarity": 0.30000000000000004,
+          "oodPenalty": 0.3
+        },
+        "prAuc": 0.35137442060135154,
+        "rocAuc": 0.5006220095693775,
+        "dangerRecall": 1.0,
+        "shadowDangerMeanRatio": 0.9965277777777778,
+        "selectionSortKey": [
+          1,
+          -0.9965277777777778,
+          0.48959608323133413,
+          0.35137442060135154,
+          0.5006220095693775
+        ]
+      },
+      {
+        "featureSetName": "baseline",
+        "hybridParams": {
+          "weightBreakage": 0.5,
+          "weightDangerSimilarity": 0.5,
+          "oodPenalty": 0.3
+        },
+        "prAuc": 0.3705479255853904,
+        "rocAuc": 0.5122846889952154,
+        "dangerRecall": 1.0,
+        "shadowDangerMeanRatio": 1.0,
+        "selectionSortKey": [
+          1,
+          -1.0,
+          0.4889975550122249,
+          0.3705479255853904,
+          0.5122846889952154
+        ]
+      }
+    ]
+  },
+  "boosterComparisons": {
+    "catboost": {
+      "status": "ok",
+      "metricsAt05": {
+        "threshold": 0.5,
+        "accuracy": 0.5339805825242718,
+        "precision": 0.3482758620689655,
+        "recall": 0.505,
+        "f1": 0.4122448979591836,
+        "fnr": 0.495,
+        "tp": 101,
+        "tn": 229,
+        "fp": 189,
+        "fn": 99,
+        "rocAuc": 0.5517822966507175,
+        "prAuc": 0.3479277228270855
+      }
+    },
+    "lightgbm": {
+      "status": "ok",
+      "metricsAt05": {
+        "threshold": 0.5,
+        "accuracy": 0.5242718446601942,
+        "precision": 0.3246268656716418,
+        "recall": 0.435,
+        "f1": 0.37179487179487175,
+        "fnr": 0.565,
+        "tp": 87,
+        "tn": 237,
+        "fp": 181,
+        "fn": 113,
+        "rocAuc": 0.5274282296650719,
+        "prAuc": 0.3292252922380217
+      }
+    },
+    "xgboost": {
+      "status": "ok",
+      "metricsAt05": {
+        "threshold": 0.5,
+        "accuracy": 0.5614886731391586,
+        "precision": 0.3650190114068441,
+        "recall": 0.48,
+        "f1": 0.4146868250539957,
+        "fnr": 0.52,
+        "tp": 96,
+        "tn": 251,
+        "fp": 167,
+        "fn": 104,
+        "rocAuc": 0.5469138755980866,
+        "prAuc": 0.3555904785413688
+      }
+    }
+  },
+  "candidateModels": {
+    "xgboost": {
+      "status": "ok",
+      "modelType": "xgboost_binary_classifier",
+      "modelPath": "xgboost_candidate_model.json",
+      "featureNames": [
+        "peakAmplitude",
+        "energy",
+        "durationMs",
+        "riseTimeMs",
+        "dominantFrequencyHz",
+        "temperatureC",
+        "humidityPct",
+        "logEnergy",
+        "energyPerDuration",
+        "riseRatio",
+        "freqXRise",
+        "tempXHumidity"
+      ],
+      "metricsAt05": {
+        "threshold": 0.5,
+        "accuracy": 0.5614886731391586,
+        "precision": 0.3650190114068441,
+        "recall": 0.48,
+        "f1": 0.4146868250539957,
+        "fnr": 0.52,
+        "tp": 96,
+        "tn": 251,
+        "fp": 167,
+        "fn": 104,
+        "rocAuc": 0.5469138755980866,
+        "prAuc": 0.3555904785413688
+      }
+    }
+  },
+  "demoProfiles": {
+    "normal": {
+      "sourceDamageType": 0,
+      "expectedRiskLevel": "CAUTION",
+      "expectedRiskScore": 0.396,
+      "features": {
+        "rms": 0.363,
+        "peakAmplitude": 73.513784,
+        "energy": 5.430555,
+        "dominantFrequencyHz": 141.796338,
+        "riseTimeMs": 0.267664,
+        "durationMs": 2.669459
+      },
+      "context": {
+        "materialType": "synthetic-rope-proxy",
+        "tensionEstimateKn": 70.0,
+        "temperatureC": 23.10056,
+        "humidityPct": 79.869898
+      }
+    },
+    "caution": {
+      "sourceDamageType": 0,
+      "expectedRiskLevel": "CAUTION",
+      "expectedRiskScore": 0.396,
+      "features": {
+        "rms": 0.363,
+        "peakAmplitude": 73.513784,
+        "energy": 5.430555,
+        "dominantFrequencyHz": 141.796338,
+        "riseTimeMs": 0.267664,
+        "durationMs": 2.669459
+      },
+      "context": {
+        "materialType": "synthetic-rope-proxy",
+        "tensionEstimateKn": 140.0,
+        "temperatureC": 23.10056,
+        "humidityPct": 79.869898
+      }
+    },
+    "danger": {
+      "sourceDamageType": 2,
+      "expectedRiskLevel": "DANGER",
+      "expectedRiskScore": 0.595192,
+      "features": {
+        "rms": 0.125,
+        "peakAmplitude": 45.959461,
+        "energy": 6.703357,
+        "dominantFrequencyHz": 422.616059,
+        "riseTimeMs": 1.629519,
+        "durationMs": 4.778835
+      },
+      "context": {
+        "materialType": "synthetic-rope-proxy",
+        "tensionEstimateKn": 220.0,
+        "temperatureC": 30.95098,
+        "humidityPct": 28.855245
+      }
+    }
+  },
+  "hybridExample": {
+    "breakageScore": 0.5344523076887711,
+    "dangerSimilarity": 0.45684069963217383,
+    "normalSimilarity": 0.5431593003678262,
+    "normalDistance": 2.1595311153826904,
+    "anomalyScore": 0.0,
+    "oodScore": 0.0,
+    "manifoldDistance": 1.9214503690707398,
+    "hybridScore": 0.5034076644661322,
+    "topDangerExamples": [
+      {
+        "exampleId": "core-00149",
+        "damageType": 2,
+        "distance": 2.210085,
+        "features": {
+          "peakAmplitude": 89.759783,
+          "energy": 1.621566,
+          "durationMs": 0.805619,
+          "riseTimeMs": 1.357618,
+          "dominantFrequencyHz": 478.532789,
+          "temperatureC": 26.632487,
+          "humidityPct": 25.376189,
+          "logEnergy": 0.963772,
+          "energyPerDuration": 2.012821,
+          "riseRatio": 1.685187,
+          "freqXRise": 649.66459,
+          "tempXHumidity": 675.831017
+        }
+      },
+      {
+        "exampleId": "core-00586",
+        "damageType": 2,
+        "distance": 2.672393,
+        "features": {
+          "peakAmplitude": 52.063934,
+          "energy": 4.475001,
+          "durationMs": 1.286245,
+          "riseTimeMs": 1.911393,
+          "dominantFrequencyHz": 398.269201,
+          "temperatureC": 37.432658,
+          "humidityPct": 24.200699,
+          "logEnergy": 1.700193,
+          "energyPerDuration": 3.479121,
+          "riseRatio": 1.486026,
+          "freqXRise": 761.249014,
+          "tempXHumidity": 905.896486
+        }
+      },
+      {
+        "exampleId": "core-00572",
+        "damageType": 2,
+        "distance": 2.794114,
+        "features": {
+          "peakAmplitude": 89.76519,
+          "energy": 3.768725,
+          "durationMs": 0.874843,
+          "riseTimeMs": 1.516117,
+          "dominantFrequencyHz": 196.955569,
+          "temperatureC": 32.471206,
+          "humidityPct": 21.114231,
+          "logEnergy": 1.562079,
+          "energyPerDuration": 4.307885,
+          "riseRatio": 1.733016,
+          "freqXRise": 298.607783,
+          "tempXHumidity": 685.604556
+        }
+      }
+    ],
+    "topNormalExamples": [
+      {
+        "exampleId": "core-00000",
+        "damageType": 0,
+        "distance": 0.0,
+        "features": {
+          "peakAmplitude": 89.001761,
+          "energy": 3.580577,
+          "durationMs": 1.041566,
+          "riseTimeMs": 1.680999,
+          "dominantFrequencyHz": 419.369234,
+          "temperatureC": 37.809478,
+          "humidityPct": 20.138428,
+          "logEnergy": 1.521825,
+          "energyPerDuration": 3.437686,
+          "riseRatio": 1.613915,
+          "freqXRise": 704.959212,
+          "tempXHumidity": 761.423471
+        }
+      },
+      {
+        "exampleId": "core-00332",
+        "damageType": 0,
+        "distance": 1.93066,
+        "features": {
+          "peakAmplitude": 82.084372,
+          "energy": 3.9899,
+          "durationMs": 1.279909,
+          "riseTimeMs": 1.868819,
+          "dominantFrequencyHz": 436.169808,
+          "temperatureC": 28.250005,
+          "humidityPct": 37.705822,
+          "logEnergy": 1.607416,
+          "energyPerDuration": 3.117332,
+          "riseRatio": 1.460119,
+          "freqXRise": 815.122337,
+          "tempXHumidity": 1065.189675
+        }
+      },
+      {
+        "exampleId": "core-00225",
+        "damageType": 0,
+        "distance": 2.897762,
+        "features": {
+          "peakAmplitude": 88.60154,
+          "energy": 3.029596,
+          "durationMs": 1.942252,
+          "riseTimeMs": 1.860549,
+          "dominantFrequencyHz": 304.141116,
+          "temperatureC": 39.414246,
+          "humidityPct": 44.448234,
+          "logEnergy": 1.393666,
+          "energyPerDuration": 1.559837,
+          "riseRatio": 0.957934,
+          "freqXRise": 565.869363,
+          "tempXHumidity": 1751.893636
+        }
+      }
+    ]
+  }
+}

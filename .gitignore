@@ -1,1 +1,10 @@
 .DS_Store
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
+# CatBoost per-run training logs (auto-generated each run)
+catboost_info/
+# Vendored ML dependencies (pip --target output) — never commit
+.vendor_ml/
+# Note: training-pipeline/artifacts/latest/ IS committed (deliverable model
+# referenced by backend LOCAL_ML_MODEL_PATH); other scratch outputs are not.
