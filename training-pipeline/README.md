@@ -31,11 +31,28 @@ PYTHONPATH=<repo>/.vendor_ml python3 port_domain_synthesis.py \
 - 검증 결과(XGBoost, GroupKFold 5): 윈도 집계 + 환경 피처 정확도 87.3%,
   위험 재현율 98.9% / 정밀도 100%
 
-### 예정 작업
+### 정식 학습 파이프라인 — `port_breakage_pipeline.py` (구현됨)
 
-정식 학습 파이프라인(`port_domain → 윈도 피처 → XGBoost → 확률 보정 → 아티팩트`)을
-아래 "로컬 추론 런타임"의 아티팩트 계약에 맞춰 산출하면, 백엔드 수정 없이
-`LOCAL_ML_MODEL_PATH`로 연결된다.
+`port_domain → 윈도 피처 → XGBoost 3-class → 온도 스케일링 보정 → 아티팩트`.
+산출 아티팩트는 `local_model_runtime.py`의 `port_window_xgb_v1` 경로가 읽으며,
+백엔드 수정 없이 `LOCAL_ML_MODEL_PATH`로 연결된다.
+
+```bash
+PYTHONPATH=<repo>/.vendor_ml python3 port_breakage_pipeline.py \
+  --src ~/Downloads/port_bollard_ae_dataset.csv
+# → artifacts/port-latest/{model_artifact.json, port_window_xgb.json, training_report.md}
+```
+
+- 윈도 피처 계약: `port_window_features.py` (`window_vector`, `WINDOW_FEATURES`,
+  `WINDOW_SIZE=12`) — 서빙 측(백엔드 inference_service)이 동일 로직으로 조립
+- riskScore = 기대 심각도(0.5·P(주의)+1.0·P(위험)) → 백엔드 riskScore-임계 히스테리시스와 정합
+- OOF(GroupKFold 5, 세션): 정확도 0.873 · macro-F1 0.876 · **위험 재현율 0.97 / 정밀도 1.00**
+- 아티팩트에 `featureSpec.runtimeFeatureNames`(이름·순서)·`modelVersion`·`policy` 동봉
+
+### 예정: SageMaker 엔드포인트 전환
+
+1단계는 λ 내장 추론(위 아티팩트, `LOCAL_ML_MODEL_PATH`). 2단계는 동일 부스터를
+SageMaker 엔드포인트로 서빙(`ml/infra`) — 백엔드는 `SAGEMAKER_ENDPOINT`만 설정하면 전환.
 
 ## 보관: Kaggle proxy 파이프라인 (레거시)
 

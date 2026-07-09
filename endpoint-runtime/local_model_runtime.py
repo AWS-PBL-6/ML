@@ -224,6 +224,71 @@ def _load_xgboost_booster(artifact: dict, artifact_path: str):
     return booster
 
 
+def _load_booster_from(artifact_path: str, model_path: str):
+    """Load an XGBoost booster referenced by a path relative to the artifact."""
+    resolved = os.path.join(os.path.dirname(os.path.abspath(artifact_path)), model_path)
+    if resolved in _XGBOOST_BOOSTERS:
+        return _XGBOOST_BOOSTERS[resolved]
+    xgboost = _load_xgboost_module()
+    if xgboost is None:
+        return None
+    booster = xgboost.Booster()
+    booster.load_model(resolved)
+    _XGBOOST_BOOSTERS[resolved] = booster
+    return booster
+
+
+def _predict_port_window(artifact: dict, artifact_path: str, request: dict, features: dict, started: float) -> dict:
+    """Score the port-domain window model (modelType port_window_xgb_v1).
+
+    Multiclass XGBoost margins → temperature-scaled softmax → 3-class probs;
+    riskScore is the expected severity (0.5·P(CAUTION) + 1.0·P(DANGER)) so the
+    backend's riskScore-threshold temporal policy keeps working unchanged.
+    """
+    model = artifact["model"]
+    meta = model["xgboost"]
+    feat_names = meta["featureNames"]
+    booster = _load_booster_from(artifact_path, meta["modelPath"])
+    xgboost = _load_xgboost_module()
+    if booster is None or xgboost is None:
+        raise RuntimeError("xgboost runtime unavailable for port_window_xgb_v1 artifact")
+
+    row = [[float(features[name]) for name in feat_names]]
+    matrix = xgboost.DMatrix(row, feature_names=feat_names)
+    margins = list(booster.predict(matrix, output_margin=True)[0])
+    temperature = float(meta.get("temperature", 1.0)) or 1.0
+    probs = _softmax([m / temperature for m in margins])
+
+    class_order = meta.get("classOrder", ["NORMAL", "CAUTION", "DANGER"])
+    class_probs = {level: round(float(probs[i]), 3) for i, level in enumerate(class_order)}
+    weights = model.get("severityWeights", [0.0, 0.5, 1.0])
+    severity = sum(float(weights[i]) * float(probs[i]) for i in range(len(probs)))
+
+    policy = artifact["policy"]
+    warn_threshold = float(policy["warnThreshold"])
+    danger_threshold = float(policy["dangerThreshold"])
+    level = classify(severity, warn_threshold, danger_threshold)
+    class_probs = _align_probs(level, class_probs)
+
+    return {
+        "schemaVersion": artifact.get("schemaVersion", SCHEMA_VERSION),
+        "requestId": request.get("requestId", ""),
+        "traceId": request.get("traceId", ""),
+        "riskLevel": level,
+        "riskScore": round(severity, 3),
+        "classProbabilities": class_probs,
+        "modelVersion": artifact.get("modelVersion", "ae-port-window-xgb"),
+        "riskSignals": {
+            "selectedVariant": "port_window_xgb",
+            "severity": round(severity, 6),
+            "pNormal": class_probs["NORMAL"],
+            "pCaution": class_probs["CAUTION"],
+            "pDanger": class_probs["DANGER"],
+        },
+        "inferenceMs": round((time.time() - started) * 1000, 2),
+    }
+
+
 def score_xgboost_candidate(artifact: dict, artifact_path: str, features: dict) -> float | None:
     xgboost_meta = _xgboost_candidate_meta(artifact)
     if xgboost_meta is None:
@@ -321,6 +386,10 @@ def predict_request(request: dict, artifact_path: str) -> dict:
     missing = [name for name in raw_required if name not in model_input]
     if missing:
         raise ValueError(f"missing modelInput features: {', '.join(missing)}")
+
+    # Port-domain window model: multiclass XGBoost over the recent event window.
+    if model.get("modelType") == "port_window_xgb_v1":
+        return _predict_port_window(artifact, artifact_path, request, features, started)
 
     hybrid_details = _hybrid_components(model, features, top_k=3) if model.get("modelType") == "hybrid_proxy_breakage_v2" else None
     hybrid_score = hybrid_details["hybridScore"] if hybrid_details is not None else score_model(model, features)

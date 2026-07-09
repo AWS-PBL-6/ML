@@ -8,3 +8,6 @@ catboost_info/
 .vendor_ml/
 # Note: training-pipeline/artifacts/latest/ IS committed (deliverable model
 # referenced by backend LOCAL_ML_MODEL_PATH); other scratch outputs are not.
+# Port-domain deliverable = model_artifact.json + port_window_xgb.json; the
+# large window training matrix is regenerable, keep it out of git.
+training-pipeline/artifacts/port-latest/prepared_window_dataset.csv
