@@ -1,0 +1,5 @@
+# The SageMaker scikit-learn framework container (ap-northeast-2, sklearn 1.2-1)
+# runs Python 3.9, which caps XGBoost at 2.1.4 (3.x requires py>=3.12). XGBoost
+# 2.1.4 loads the 3.3.0-trained booster (port_window_xgb.json) and reproduces its
+# predictions within ~0.5% — same risk verdict — so we pin it for serving.
+xgboost==2.1.4
