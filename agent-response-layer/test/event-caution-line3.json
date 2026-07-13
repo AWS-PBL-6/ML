@@ -1,0 +1,25 @@
+{
+  "traceId": "trc-test-caution-0003",
+  "eventId": "evt-test-caution-0003",
+  "siteId": "yard-a",
+  "lineId": "mooring-03",
+  "bollardId": "bollard-03",
+  "vesselId": "vessel-01",
+  "riskLevel": "CAUTION",
+  "riskScore": 0.58,
+  "features": {
+    "amplitudeDbAe": 62.4,
+    "snrDb": 18.2,
+    "hitSum": 47,
+    "hitMax": 9,
+    "nHigh": 6
+  },
+  "context": {
+    "materialType": "synthetic-rope",
+    "tensionEstimateKn": 132,
+    "temperatureC": 27.5,
+    "humidityPct": 74,
+    "windMps": 11.2,
+    "craneActive": 1
+  }
+}

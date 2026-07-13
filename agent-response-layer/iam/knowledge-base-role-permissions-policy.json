@@ -1,0 +1,41 @@
+{
+  "Version": "2012-10-17",
+  "Id": "AeSentinelKnowledgeBaseServiceRolePermissions",
+  "Statement": [
+    {
+      "Sid": "ReadKnowledgeBaseSourceBucket",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::REPLACE_KB_BUCKET",
+        "arn:aws:s3:::REPLACE_KB_BUCKET/*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceAccount": "762616536500"
+        }
+      }
+    },
+    {
+      "Sid": "InvokeEmbeddingModel",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:InvokeModel"
+      ],
+      "Resource": [
+        "arn:aws:bedrock:ap-northeast-2::foundation-model/amazon.titan-embed-text-v2:0"
+      ]
+    },
+    {
+      "Sid": "OpenSearchServerlessDataAccess",
+      "Effect": "Allow",
+      "Action": [
+        "aoss:APIAccessAll"
+      ],
+      "Resource": "arn:aws:aoss:ap-northeast-2:762616536500:collection/REPLACE_COLLECTION_ID"
+    }
+  ]
+}
