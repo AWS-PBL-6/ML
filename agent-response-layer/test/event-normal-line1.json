@@ -1,0 +1,25 @@
+{
+  "traceId": "trc-test-normal-0001",
+  "eventId": "evt-test-normal-0001",
+  "siteId": "yard-a",
+  "lineId": "mooring-01",
+  "bollardId": "bollard-01",
+  "vesselId": "vessel-01",
+  "riskLevel": "NORMAL",
+  "riskScore": 0.04,
+  "features": {
+    "amplitudeDbAe": 41.0,
+    "snrDb": 8.1,
+    "hitSum": 3,
+    "hitMax": 1,
+    "nHigh": 0
+  },
+  "context": {
+    "materialType": "synthetic-rope",
+    "tensionEstimateKn": 62,
+    "temperatureC": 25.0,
+    "humidityPct": 70,
+    "windMps": 4.5,
+    "craneActive": 0
+  }
+}

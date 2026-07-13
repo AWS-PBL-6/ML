@@ -1,0 +1,54 @@
+{
+  "Version": "2012-10-17",
+  "Id": "AeSentinelResponseGuidanceLambdaExecution",
+  "Statement": [
+    {
+      "Sid": "CloudWatchLogs",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:ap-northeast-2:762616536500:log-group:/aws/lambda/ae-sentinel-response-guidance:*"
+    },
+    {
+      "Sid": "BedrockKnowledgeBaseRetrieveAndGenerate",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:Retrieve",
+        "bedrock:RetrieveAndGenerate"
+      ],
+      "Resource": "arn:aws:bedrock:ap-northeast-2:762616536500:knowledge-base/REPLACE_KB_ID"
+    },
+    {
+      "Sid": "BedrockInvokeModelForGeneration",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:InvokeModel"
+      ],
+      "Resource": [
+        "arn:aws:bedrock:*::foundation-model/anthropic.claude-3-5-sonnet-20240620-v1:0",
+        "arn:aws:bedrock:*::foundation-model/anthropic.claude-3-haiku-20240307-v1:0",
+        "arn:aws:bedrock:ap-northeast-2:762616536500:inference-profile/apac.anthropic.claude-3-5-sonnet-20240620-v1:0",
+        "arn:aws:bedrock:ap-northeast-2:762616536500:inference-profile/apac.anthropic.claude-3-haiku-20240307-v1:0"
+      ]
+    },
+    {
+      "Sid": "BedrockInvokeAgentOptional",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:InvokeAgent"
+      ],
+      "Resource": "arn:aws:bedrock:ap-northeast-2:762616536500:agent-alias/REPLACE_AGENT_ID/*"
+    },
+    {
+      "Sid": "PublishManagerAlerts",
+      "Effect": "Allow",
+      "Action": [
+        "sns:Publish"
+      ],
+      "Resource": "arn:aws:sns:ap-northeast-2:762616536500:ae-sentinel-app-alerts"
+    }
+  ]
+}
