@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "type": "response.guidance.generated",
+  "traceId": "trc-20260707-0001",
+  "eventId": "evt-20260707-0001",
+  "generatedAt": "2026-07-07T07:00:01.480Z",
+  "lineId": "mooring-05",
+  "vesselId": "vessel-02",
+  "siteId": "yard-a",
+  "riskLevel": "DANGER",
+  "riskScore": 0.962,
+  "source": "KB",
+  "alertDispatched": true,
+  "guidance": {
+    "riskLevel": "DANGER",
+    "headline": "5번 계류삭 위험. 데드존 통제·하역 중단·인원 이탈 확인 요",
+    "situation": "5번 계류삭(볼라드 bollard-05, 선박 vessel-02)의 접촉식 AE 진폭과 히트카운트가 급증하고 고주파 이벤트가 다수 관측되었습니다. 합성섬유 로프 추정 장력이 MBL의 70%를 초과해 파단이 임박한 스냅백 위험 상태입니다.",
+    "immediateActions": [
+      "스냅백 위험구역(데드존) 내 인원 이탈 완료를 무전으로 확인",
+      "해당 선석 크레인·하역 작업 전면 중단",
+      "데드존 및 로프 진행 방향 연장선 접근 통제 선언"
+    ],
+    "followupActions": [
+      "선박 대리점·도선사에 엔진 대기 및 계류 재조정 요청",
+      "인접 볼라드 라인 연쇄 파단 가능성 점검, 필요 시 인접 선석 작업 중단",
+      "파단 발생 시 비상센터(119) 통보 및 현장 보존, 안전일지 기록"
+    ],
+    "citations": [
+      "부산신항 A터미널 계류 안전 운영규정 §4 DANGER 사내 대처 절차",
+      "계류삭 안전관리 일반지침 §3 DANGER 표준 대처방안",
+      "스냅백 위험구역 대응 지침 §2 인원 통제 절차"
+    ],
+    "confidence": "HIGH"
+  }
+}

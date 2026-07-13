@@ -77,7 +77,7 @@ ML 위험판정(`NORMAL/CAUTION/DANGER`)을 받아, **Bedrock Knowledge Base(RAG
   "alertDispatched": true
 }
 ```
-- **정식 규격**: `packages/contracts/schemas/app/response-guidance.v1.json` (예제: `examples/response-guidance.v1.json`)
+- **정식 규격**: `contracts/schemas/response-guidance.v1.json` (예제: `contracts/examples/response-guidance.v1.json`)
 - 대시보드팀은 이 `guidance` 객체를 그대로 화면에 렌더링하면 된다.
 
 ---
@@ -110,5 +110,5 @@ agent-response-layer/
   agent/                            # 프롬프트/지시문
   iam/                              # 권한 정책
   test/                             # 테스트 입력 + 시나리오
-packages/contracts/schemas/app/response-guidance.v1.json  # 출력 규격(계약)
+  contracts/                        # 출력 규격(계약) 스키마 + 예제
 ```
