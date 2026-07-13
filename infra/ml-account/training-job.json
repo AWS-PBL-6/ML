@@ -1,0 +1,47 @@
+{
+  "TrainingJobName": "ae-sentinel-line-eye-training-20260713-02",
+  "RoleArn": "arn:aws:iam::727847798739:role/ae-sentinel-sagemaker-exec",
+  "AlgorithmSpecification": {
+    "TrainingImage": "366743142698.dkr.ecr.ap-northeast-2.amazonaws.com/sagemaker-scikit-learn:1.2-1",
+    "TrainingInputMode": "File"
+  },
+  "InputDataConfig": [
+    {
+      "ChannelName": "training",
+      "DataSource": {
+        "S3DataSource": {
+          "S3DataType": "S3Prefix",
+          "S3Uri": "s3://ae-sentinel-sagemaker-727847798739/line-eye/processing/ae-sentinel-line-eye-processing-20260713-01/output",
+          "S3DataDistributionType": "FullyReplicated"
+        }
+      }
+    }
+  ],
+  "OutputDataConfig": {
+    "S3OutputPath": "s3://ae-sentinel-sagemaker-727847798739/line-eye/training"
+  },
+  "ResourceConfig": {
+    "InstanceCount": 1,
+    "InstanceType": "ml.m5.large",
+    "VolumeSizeInGB": 10
+  },
+  "StoppingCondition": {"MaxRuntimeInSeconds": 3600},
+  "HyperParameters": {
+    "sagemaker_program": "\"train.py\"",
+    "sagemaker_submit_directory": "\"s3://ae-sentinel-sagemaker-727847798739/line-eye/code/training-source.tar.gz\"",
+    "sagemaker_container_log_level": "20",
+    "sagemaker_job_name": "\"ae-sentinel-line-eye-training-20260713-02\"",
+    "sagemaker_region": "\"ap-northeast-2\""
+  },
+  "Environment": {
+    "SAGEMAKER_PROGRAM": "train.py",
+    "SAGEMAKER_SUBMIT_DIRECTORY": "s3://ae-sentinel-sagemaker-727847798739/line-eye/code/training-source.tar.gz",
+    "SAGEMAKER_CONTAINER_LOG_LEVEL": "20",
+    "SAGEMAKER_REGION": "ap-northeast-2"
+  },
+  "EnableNetworkIsolation": false,
+  "Tags": [
+    {"Key": "Project", "Value": "AE-Sentinel"},
+    {"Key": "SensorPlacement", "Value": "MooringLineEye"}
+  ]
+}

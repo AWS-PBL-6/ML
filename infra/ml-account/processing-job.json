@@ -1,0 +1,52 @@
+{
+  "ProcessingJobName": "ae-sentinel-line-eye-processing-20260713-01",
+  "RoleArn": "arn:aws:iam::727847798739:role/ae-sentinel-sagemaker-exec",
+  "AppSpecification": {
+    "ImageUri": "366743142698.dkr.ecr.ap-northeast-2.amazonaws.com/sagemaker-scikit-learn:1.2-1",
+    "ContainerEntrypoint": ["python3", "/opt/ml/processing/input/code/processing.py"]
+  },
+  "ProcessingInputs": [
+    {
+      "InputName": "code",
+      "S3Input": {
+        "S3Uri": "s3://ae-sentinel-sagemaker-727847798739/line-eye/code/processing.py",
+        "LocalPath": "/opt/ml/processing/input/code",
+        "S3DataType": "S3Prefix",
+        "S3InputMode": "File"
+      }
+    },
+    {
+      "InputName": "data",
+      "S3Input": {
+        "S3Uri": "s3://ae-sentinel-sagemaker-727847798739/line-eye/datasets/source/port_mooring_eye_ae_dataset.csv",
+        "LocalPath": "/opt/ml/processing/input/data",
+        "S3DataType": "S3Prefix",
+        "S3InputMode": "File"
+      }
+    }
+  ],
+  "ProcessingOutputConfig": {
+    "Outputs": [
+      {
+        "OutputName": "prepared",
+        "S3Output": {
+          "S3Uri": "s3://ae-sentinel-sagemaker-727847798739/line-eye/processing/ae-sentinel-line-eye-processing-20260713-01/output",
+          "LocalPath": "/opt/ml/processing/output",
+          "S3UploadMode": "EndOfJob"
+        }
+      }
+    ]
+  },
+  "ProcessingResources": {
+    "ClusterConfig": {
+      "InstanceCount": 1,
+      "InstanceType": "ml.m5.large",
+      "VolumeSizeInGB": 10
+    }
+  },
+  "StoppingCondition": {"MaxRuntimeInSeconds": 1800},
+  "Tags": [
+    {"Key": "Project", "Value": "AE-Sentinel"},
+    {"Key": "SensorPlacement", "Value": "MooringLineEye"}
+  ]
+}

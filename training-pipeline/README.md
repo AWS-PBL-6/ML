@@ -6,20 +6,22 @@ SageMaker Processing, Training, Evaluation, Registry 관련 코드를 둔다.
 
 계류삭 AE 파단 실측 논문(Bashir et al. 2017, *Applied Acoustics* 121)을 근거로
 한 합성 데이터셋을 사용한다. 근거·평가·검증 문서는
-[docs/docs](../../docs/docs) 의 `rope-ae-dataset-evaluation.md`,
-`port-ae-dataset.md`, `dataset-reliability-report.md` 참조.
+[`rope-ae-dataset-evaluation.md`](https://github.com/AWS-PBL-6/docs/blob/main/docs/ml-data/rope-ae-dataset-evaluation.md),
+[`port-ae-dataset.md`](https://github.com/AWS-PBL-6/docs/blob/main/docs/ml-data/port-ae-dataset.md),
+[`dataset-reliability-report.md`](https://github.com/AWS-PBL-6/docs/blob/main/docs/ml-data/dataset-reliability-report.md)를 참조한다.
 
 ### 항만 도메인 변환 생성기 — `port_domain_synthesis.py`
 
-수중 하이드로폰 계측(dB re 1 μPa) 기반 합성 데이터셋을 **안벽 볼라드 부착
-접촉식 AE 센서 + 실항만 배경 소음** 도메인으로 변환한다. 단위 변환·거리 감쇠·
+수중 하이드로폰 계측(dB re 1 μPa) 기반 합성 데이터셋을 **계류삭의 선박 측 연결
+고리(아이·스플라이스 인근) 부착 피에조 센서 + 실항만 배경 소음** 도메인으로 변환한다.
+단위 변환·거리 감쇠·
 부동 검출 임계·크레인/강우/바람 교란 주입을 수행하며, 모든 가정 파라미터는
 파일 상단 `PARAMS` 한 곳에 집약되어 실센서 수집 후 재보정할 수 있다.
 
 ```bash
 PYTHONPATH=<repo>/.vendor_ml python3 port_domain_synthesis.py \
   --src ~/Downloads/synthetic_rope_damage_classification_30k.csv \
-  --out ~/Downloads/port_bollard_ae_dataset.csv
+  --out ~/Downloads/port_mooring_eye_ae_dataset.csv
 ```
 
 ### 학습 원칙 (검증됨)
@@ -39,8 +41,8 @@ PYTHONPATH=<repo>/.vendor_ml python3 port_domain_synthesis.py \
 
 ```bash
 PYTHONPATH=<repo>/.vendor_ml python3 port_breakage_pipeline.py \
-  --src ~/Downloads/port_bollard_ae_dataset.csv
-# → artifacts/port-latest/{model_artifact.json, port_window_xgb.json, training_report.md}
+  --src ~/Downloads/port_mooring_eye_ae_dataset.csv
+# → artifacts/line-eye-latest/{model_artifact.json, port_window_xgb.json, training_report.md}
 ```
 
 - 윈도 피처 계약: `port_window_features.py` (`window_vector`, `WINDOW_FEATURES`,
@@ -57,7 +59,7 @@ SageMaker 엔드포인트로 서빙(`ml/infra`) — 백엔드는 `SAGEMAKER_ENDP
 ## 보관: Kaggle proxy 파이프라인 (레거시)
 
 > Kaggle 항공기 복합재 AE 데이터셋 기반의 `0 vs 2` proxy 접근. 현행 방법이 아니며
-> 배경은 [보관 문서](../../docs/docs/archive/README.md) 참조. 코드/아티팩트는 로컬
+> 배경은 [보관 문서](https://github.com/AWS-PBL-6/docs/blob/main/docs/archive/README.md) 참조. 코드/아티팩트는 로컬
 > 추론 경로(`LOCAL_ML_MODEL_PATH`)에 물려 있어, 새 rope-AE 파이프라인이 동일
 > 아티팩트 계약으로 대체할 때까지 남겨둔다.
 

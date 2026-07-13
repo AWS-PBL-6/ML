@@ -1,13 +1,14 @@
-"""Port-domain synthesis: underwater lab AE dataset → shore-bollard AE dataset.
+"""Port-domain synthesis: underwater lab AE → mooring-eye piezo dataset.
 
 Transforms the Bashir et al. 2017 기반 합성 데이터셋(수중 하이드로폰, dB re 1 uPa)
-을 우리 배포 시나리오 — **안벽 볼라드 부착 접촉식 AE 센서(공기/구조 전파)** —
+을 우리 배포 시나리오 — **계류삭의 선박 측 연결 고리(아이·스플라이스 인근)에
+부착한 접촉식 피에조 센서** —
 도메인으로 변환하고, 실항만 배경 소음·기상 교란·검출 임계 손실을 주입한다.
 
 사용법:
     PYTHONPATH=<repo>/.vendor_ml python3 port_domain_synthesis.py \
         --src ~/Downloads/synthetic_rope_damage_classification_30k.csv \
-        --out ~/Downloads/port_bollard_ae_dataset.csv
+        --out ~/Downloads/port_mooring_eye_ae_dataset.csv
 
 근거 및 가정 (각 항목은 코드의 PARAMS 에 대응):
   [A1] 접촉식 AE 계측 스케일: dB_AE(re 1 uV), 표준 검출 임계 ~40 dB_AE,
@@ -20,7 +21,7 @@ Transforms the Bashir et al. 2017 기반 합성 데이터셋(수중 하이드로
        군내 상대편차는 원본 z-score 유지).
   [A3] 합성섬유 로프는 점탄성 재질로 감쇠가 큼(guided-wave 문헌 공통 서술;
        정량치 부재) → 주파수 의존 감쇠 α = 1.0~2.8 dB/m 가정 밴드 +
-       로프-볼라드 접촉 커플링 손실 6±1.5 dB. **가정임을 명시**.
+       계류삭-센서 클램프 커플링 손실 1.5±0.5 dB. **가정임을 명시**.
   [A4] 항만 배경 소음은 갠트리 크레인·정박선 보조엔진·트럭이 지배, 에너지는
        주로 2.5 kHz 이하 저주파 (Port of Long Beach noise map; MDPI
        Sustainability 12(20):8742, 12(5):1740). 접촉식 AE 는 20 kHz 하이패스로
@@ -53,7 +54,7 @@ import pandas as pd
 
 PARAMS = {
     # [A2] 신호군 → 소스레벨(dB_AE) 사상 (mu, sigma)
-    # 저진폭 마찰 AE 의 발생지는 접촉부(채핑 존) — 볼라드 위 센서와 근접하므로
+    # 저진폭 마찰 AE 의 발생지는 아이·스플라이스/채핑 존 — 연결 고리 센서와 근접하므로
     # 근거리 검출을 전제로 54 dB_AE 로 둔다 (군간 순서는 그대로 보존).
     "family_dbae": {
         "Low amplitude": (54.0, 4.0),
@@ -68,7 +69,7 @@ PARAMS = {
         "Medium amplitude": 2.2,
         "High amplitude": 2.8,
     },
-    "coupling_loss": (4.0, 1.5),  # [A3] 로프→볼라드 접촉 손실 (센서가 접촉 구조물 위)
+    "sensor_coupling_loss": (1.5, 0.5),  # [A3] 로프→클램프형 피에조 센서 전달 손실
     # [A7] 접촉식 센서 대역(kHz): family → (low, high_mu, high_sigma)
     "family_band": {
         "Low amplitude": (20.0, 40.0, 5.0),
@@ -103,9 +104,9 @@ PARAMS = {
 
 
 def _weak_points(rng) -> np.ndarray:
-    """세션당 결함 취약점 1~2개의 볼라드-거리(m).
+    """세션당 결함 취약점 1~2개의 연결 고리 센서-거리(m).
 
-    마찰·채핑 손상은 접촉부(볼라드/페어리드) 근방에 집중되므로 지수분포로
+    마찰·채핑 손상은 아이·스플라이스/페어리드 근방에 집중되므로 지수분포로
     근거리 편향(평균 ~1.4 m, 최대 6 m)을 준다.
     """
     n = rng.integers(1, 3)
@@ -170,9 +171,9 @@ def synthesize(src: pd.DataFrame, params=PARAMS) -> pd.DataFrame:
             rain, wind, crane, floor, temp, hum = env_at(t)
             thr = floor + params["threshold_over_floor"]
             alpha = params["alpha_db_per_m"][fam]
-            coupling = rng.normal(*params["coupling_loss"])
+            coupling = rng.normal(*params["sensor_coupling_loss"])
             received = amp_src - alpha * dist - coupling + rng.normal(0, 1.0)
-            if source != "ROPE":  # 교란원은 볼라드/구조에서 직접 → 감쇠 미미
+            if source != "ROPE":  # 강우/마찰/충격이 센서 클램프 주변에 직접 유입
                 received = amp_src
             if received < thr:
                 return  # [A1] 검출 실패 (미탐)

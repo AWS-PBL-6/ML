@@ -1,6 +1,6 @@
 """Port-domain AE breakage training pipeline (production artifact).
 
-port_bollard_ae_dataset → per-session window features (port_window_features)
+port_mooring_eye_ae_dataset → per-session window features (port_window_features)
 → XGBoost 3-class (GroupKFold OOF) → temperature calibration → threshold policy
 → artifact readable by ml/endpoint-runtime/local_model_runtime.py.
 
@@ -9,7 +9,7 @@ no application-api change (same inference-request/response contract).
 
 Usage:
     PYTHONPATH=<repo>/.vendor_ml python3 port_breakage_pipeline.py \
-        --src ~/Downloads/port_bollard_ae_dataset.csv
+        --src ~/Downloads/port_mooring_eye_ae_dataset.csv
 """
 from __future__ import annotations
 
@@ -174,8 +174,8 @@ NUM_ROUNDS = 300
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--src", default=os.path.expanduser("~/Downloads/port_bollard_ae_dataset.csv"))
-    ap.add_argument("--out", default=os.path.join(os.path.dirname(__file__), "artifacts", "port-latest"))
+    ap.add_argument("--src", default=os.path.expanduser("~/Downloads/port_mooring_eye_ae_dataset.csv"))
+    ap.add_argument("--out", default=os.path.join(os.path.dirname(__file__), "artifacts", "line-eye-latest"))
     args = ap.parse_args()
 
     df = pd.read_csv(args.src)
