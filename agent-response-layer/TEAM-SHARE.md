@@ -57,7 +57,10 @@ ML 위험판정(`NORMAL/CAUTION/DANGER`)을 받아, **Bedrock Knowledge Base(RAG
 }
 ```
 - 필수: `riskLevel`(NORMAL/CAUTION/DANGER). 나머지는 있으면 안내 품질↑, 없으면 기본값 처리.
-- 전체 예시: `test/event-caution-line3.json`, `test/event-danger-line5.json`, `test/event-normal-line1.json`
+- **입력 계약**: `contracts/schemas/agent-request.v1.json` (예제: `contracts/examples/agent-request.v1.json`)
+- **상세 인터페이스 문서**: `docs/backend-agent-interface.md`
+- feature 어휘는 아키텍처 문서 6.2(`rms/peakAmplitude/energy/dominantFrequencyHz/riseTimeMs/durationMs`)를 따름
+- 테스트 예시: `test/event-caution-line3.json`, `test/event-danger-line5.json`, `test/event-normal-line1.json`
 
 ### 출력(Output) = 대시보드/알림용
 ```json

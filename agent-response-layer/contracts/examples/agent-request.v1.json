@@ -1,14 +1,21 @@
 {
   "schemaVersion": "1.0.0",
-  "traceId": "trc-test-danger-0005",
-  "eventId": "evt-test-danger-0005",
+  "traceId": "trc-20260713-0005",
+  "eventId": "evt-20260713-0005",
+  "requestId": "req-20260713-0005",
+  "lineId": "mooring-05",
   "siteId": "yard-a",
   "berthId": "berth-01",
-  "lineId": "mooring-05",
   "bollardId": "bollard-05",
   "vesselId": "vessel-02",
   "riskLevel": "DANGER",
   "riskScore": 0.962,
+  "classProbabilities": {
+    "NORMAL": 0.012,
+    "CAUTION": 0.026,
+    "DANGER": 0.962
+  },
+  "modelVersion": "port-window-xgb-v1",
   "features": {
     "rms": 0.82,
     "peakAmplitude": 0.96,
@@ -22,7 +29,8 @@
     "tensionEstimateKn": 168,
     "temperatureC": 26.1,
     "humidityPct": 78,
-    "windMps": 16.4,
-    "craneActive": 1
+    "sensorKind": "piezo",
+    "structuralFreqHz": 30.8,
+    "loadRatio": 0.93
   }
 }

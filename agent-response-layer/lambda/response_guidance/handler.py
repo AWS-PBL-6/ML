@@ -70,6 +70,7 @@ def _extract_decision(event: dict) -> dict:
         "traceId": body.get("traceId") or f"trc-{uuid.uuid4().hex[:12]}",
         "eventId": body.get("eventId") or f"evt-{uuid.uuid4().hex[:12]}",
         "siteId": body.get("siteId", "unknown"),
+        "berthId": body.get("berthId", "unknown"),
         "lineId": body.get("lineId", "unknown"),
         "bollardId": body.get("bollardId", "unknown"),
         "vesselId": body.get("vesselId", "미계선"),
@@ -90,7 +91,7 @@ def _build_query(d: dict) -> str:
 
     lines = [
         "[계류삭 위험 대응 요청]",
-        f"사이트: {d['siteId']}",
+        f"사이트: {d['siteId']} / 선석: {d['berthId']}",
         f"계류삭: {d['lineId']} (볼라드 {d['bollardId']}, 선박 {d['vesselId']})",
         f"위험도: {d['riskLevel']} (riskScore={d['riskScore']})",
         "판정 근거 AE 특징값:",

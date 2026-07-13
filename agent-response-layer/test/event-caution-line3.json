@@ -1,7 +1,9 @@
 {
+  "schemaVersion": "1.0.0",
   "traceId": "trc-test-caution-0003",
   "eventId": "evt-test-caution-0003",
   "siteId": "yard-a",
+  "berthId": "berth-01",
   "lineId": "mooring-03",
   "bollardId": "bollard-03",
   "vesselId": "vessel-01",

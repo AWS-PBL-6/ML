@@ -63,11 +63,15 @@ agent-response-layer/
     event-caution-line3.json / event-danger-line5.json / event-normal-line1.json
     TEST-SCENARIOS.md
   contracts/
-    schemas/response-guidance.v1.json    # 출력 규격(계약)
+    schemas/agent-request.v1.json        # 입력 규격 (Backend -> Agent)
+    schemas/response-guidance.v1.json    # 출력 규격 (Agent -> Backend)
+    examples/agent-request.v1.json
     examples/response-guidance.v1.json
 ```
 
-계약(이 저장소 내): `contracts/schemas/response-guidance.v1.json` (+ `contracts/examples/response-guidance.v1.json`).
+경계 계약(이 저장소 내):
+- 입력 `contracts/schemas/agent-request.v1.json` — Backend가 위험판정 후 이 형식으로 호출
+- 출력 `contracts/schemas/response-guidance.v1.json` — Agent가 반환, Backend가 EventRecord에 저장
 
 ---
 
