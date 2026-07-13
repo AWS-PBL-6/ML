@@ -1,0 +1,18 @@
+{
+  "ModelName": "ae-sentinel-line-eye-xgb-20260713",
+  "PrimaryContainer": {
+    "Image": "366743142698.dkr.ecr.ap-northeast-2.amazonaws.com/sagemaker-scikit-learn:1.2-1",
+    "ModelDataUrl": "s3://ae-sentinel-sagemaker-727847798739/line-eye/training/ae-sentinel-line-eye-training-20260713-02/output/model.tar.gz",
+    "Environment": {
+      "SAGEMAKER_PROGRAM": "inference.py",
+      "SAGEMAKER_SUBMIT_DIRECTORY": "/opt/ml/model/code",
+      "SAGEMAKER_CONTAINER_LOG_LEVEL": "20",
+      "SAGEMAKER_REGION": "ap-northeast-2"
+    }
+  },
+  "ExecutionRoleArn": "arn:aws:iam::727847798739:role/ae-sentinel-sagemaker-exec",
+  "Tags": [
+    {"Key": "Project", "Value": "AE-Sentinel"},
+    {"Key": "ModelPackage", "Value": "ae-sentinel-line-eye-models-1"}
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "EndpointConfigName": "ae-sentinel-port-window-line-eye-20260713-cfg",
+  "ProductionVariants": [
+    {
+      "VariantName": "AllTraffic",
+      "ModelName": "ae-sentinel-line-eye-xgb-20260713",
+      "InitialVariantWeight": 1.0,
+      "ServerlessConfig": {
+        "MemorySizeInMB": 3072,
+        "MaxConcurrency": 5
+      }
+    }
+  ],
+  "Tags": [
+    {"Key": "Project", "Value": "AE-Sentinel"},
+    {"Key": "ModelPackage", "Value": "ae-sentinel-line-eye-models-1"}
+  ]
+}

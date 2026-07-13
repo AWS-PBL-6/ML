@@ -1,0 +1,29 @@
+{
+  "ModelPackageGroupName": "ae-sentinel-line-eye-models",
+  "ModelPackageDescription": "Line-eye piezo window XGBoost trained by ae-sentinel-line-eye-training-20260713-02",
+  "ModelApprovalStatus": "PendingManualApproval",
+  "InferenceSpecification": {
+    "Containers": [
+      {
+        "Image": "366743142698.dkr.ecr.ap-northeast-2.amazonaws.com/sagemaker-scikit-learn:1.2-1",
+        "ModelDataUrl": "s3://ae-sentinel-sagemaker-727847798739/line-eye/training/ae-sentinel-line-eye-training-20260713-02/output/model.tar.gz",
+        "Environment": {
+          "SAGEMAKER_PROGRAM": "inference.py",
+          "SAGEMAKER_SUBMIT_DIRECTORY": "/opt/ml/model/code",
+          "SAGEMAKER_CONTAINER_LOG_LEVEL": "20"
+        }
+      }
+    ],
+    "SupportedContentTypes": ["application/json"],
+    "SupportedResponseMIMETypes": ["application/json"],
+    "SupportedRealtimeInferenceInstanceTypes": ["ml.m5.large"]
+  },
+  "CustomerMetadataProperties": {
+    "project": "AE-Sentinel",
+    "sensorPlacement": "mooring-line-eye",
+    "trainingJob": "ae-sentinel-line-eye-training-20260713-02",
+    "modelVersion": "ae-port-window-xgb-v1-20260713",
+    "dangerRecall": "0.9699",
+    "dangerPrecision": "0.9993"
+  }
+}

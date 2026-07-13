@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "requestId": "req-line-eye-smoke-20260713",
+  "traceId": "trc-line-eye-smoke-20260713",
+  "eventId": "evt-line-eye-smoke-20260713",
+  "modelInput": {
+    "amp_mean": 88.0,
+    "amp_max": 96.0,
+    "snr_mean": 42.0,
+    "snr_max": 60.0,
+    "hit_sum": 220.0,
+    "hit_max": 28.0,
+    "dur_max": 4.0,
+    "n_low": 0.0,
+    "n_med": 2.0,
+    "n_high": 9.0,
+    "n_lhf": 1.0,
+    "fhigh_max": 205.0,
+    "rate": 24.0,
+    "noise": 40.0,
+    "rain": 0.0,
+    "wind": 3.0,
+    "crane": 0.0
+  }
+}

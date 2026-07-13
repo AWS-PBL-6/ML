@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "1.0.0",
+  "modelVersion": "ae-port-window-xgb-v1-20260713",
+  "createdAt": "2026-07-13T05:48:19.000Z",
+  "featureSpec": {
+    "windowSpecVersion": "1.0.0",
+    "runtimeFeatureNames": [
+      "amp_mean",
+      "amp_max",
+      "snr_mean",
+      "snr_max",
+      "hit_sum",
+      "hit_max",
+      "dur_max",
+      "n_low",
+      "n_med",
+      "n_high",
+      "n_lhf",
+      "fhigh_max",
+      "rate",
+      "noise",
+      "rain",
+      "wind",
+      "crane"
+    ],
+    "window": {
+      "size": 12,
+      "minEvents": 3
+    },
+    "note": "serving side assembles these via repo.list_events(lineId, limit=window.size)"
+  },
+  "model": {
+    "modelType": "port_window_xgb_v1",
+    "xgboost": {
+      "modelPath": "port_window_xgb.json",
+      "featureNames": [
+        "amp_mean",
+        "amp_max",
+        "snr_mean",
+        "snr_max",
+        "hit_sum",
+        "hit_max",
+        "dur_max",
+        "n_low",
+        "n_med",
+        "n_high",
+        "n_lhf",
+        "fhigh_max",
+        "rate",
+        "noise",
+        "rain",
+        "wind",
+        "crane"
+      ],
+      "numClass": 3,
+      "classOrder": [
+        "NORMAL",
+        "CAUTION",
+        "DANGER"
+      ],
+      "temperature": 2.02
+    },
+    "severityWeights": [
+      0.0,
+      0.5,
+      1.0
+    ]
+  },
+  "policy": {
+    "warnThreshold": 0.3915,
+    "dangerThreshold": 0.9807,
+    "warnRelease": 0.2915,
+    "dangerRelease": 0.8307,
+    "highConfidenceDanger": 0.98,
+    "oodCautionThreshold": 0.6,
+    "oodBlockDangerThreshold": 0.85,
+    "anomalyCautionThreshold": 0.6,
+    "anomalyBlockNormalThreshold": 0.85,
+    "trend": {
+      "windowSize": 5,
+      "cautionMinWarnHits": 2,
+      "dangerMinDangerHits": 3,
+      "emaAlpha": 0.5
+    }
+  },
+  "runtime": {
+    "defaultVariant": "port_window_xgb"
+  },
+  "metrics": {
+    "oofAccuracy": 0.87,
+    "oofMacroF1": 0.8717,
+    "dangerRecall": 0.9701,
+    "dangerPrecision": 0.9998,
+    "confusion": [
+      [
+        12359,
+        623,
+        0
+      ],
+      [
+        3725,
+        8282,
+        2
+      ],
+      [
+        24,
+        305,
+        10685
+      ]
+    ],
+    "temperature": 2.02
+  },
+  "trainedFrom": "port_mooring_eye_ae_dataset.csv"
+}

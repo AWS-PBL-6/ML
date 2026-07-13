@@ -5,7 +5,7 @@
 > 상황별 대처방안을 검색·생성해 **관리자에게 SNS/대시보드로 전달**한다.
 >
 > - 계정: **762616536500** · 리전: **ap-northeast-2 (서울)**
-> - 기존 스택 연동 대상: `ae-sentinel-app` (SAM) — [애플리케이션 계정 가이드](../docs/aws-application-account-guide.md)
+> - 기존 스택 연동 대상: `ae-sentinel-app` (SAM) — [애플리케이션 계정 가이드](https://github.com/AWS-PBL-6/docs/blob/main/docs/operations/aws-application-account-guide.md)
 > - 담당 계층: 아키텍처 다이어그램의 **Agent-Based Response Layer**
 
 ---
