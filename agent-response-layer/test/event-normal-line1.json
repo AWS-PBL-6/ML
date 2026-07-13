@@ -8,11 +8,12 @@
   "riskLevel": "NORMAL",
   "riskScore": 0.04,
   "features": {
-    "amplitudeDbAe": 41.0,
-    "snrDb": 8.1,
-    "hitSum": 3,
-    "hitMax": 1,
-    "nHigh": 0
+    "rms": 0.06,
+    "peakAmplitude": 0.11,
+    "energy": 12,
+    "dominantFrequencyHz": 45000,
+    "riseTimeMs": 20.0,
+    "durationMs": 5
   },
   "context": {
     "materialType": "synthetic-rope",

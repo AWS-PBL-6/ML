@@ -50,9 +50,10 @@ ML 위험판정(`NORMAL/CAUTION/DANGER`)을 받아, **Bedrock Knowledge Base(RAG
   "vesselId": "vessel-02",
   "riskLevel": "DANGER",
   "riskScore": 0.962,
-  "features": { "amplitudeDbAe": 84.7, "snrDb": 31.5, "hitSum": 214, "hitMax": 38, "nHigh": 22 },
+  "features": { "rms": 0.82, "peakAmplitude": 0.96, "energy": 1450,
+                "dominantFrequencyHz": 210000, "riseTimeMs": 3.2, "durationMs": 48 },
   "context": { "materialType": "synthetic-rope", "tensionEstimateKn": 168,
-               "temperatureC": 26.1, "humidityPct": 78, "windMps": 16.4, "craneActive": 1 }
+               "temperatureC": 26.1, "humidityPct": 78 }
 }
 ```
 - 필수: `riskLevel`(NORMAL/CAUTION/DANGER). 나머지는 있으면 안내 품질↑, 없으면 기본값 처리.
