@@ -1,0 +1,18 @@
+{
+  "metadataAttributes": {
+    "approvalStatus": "approved",
+    "scope": "general",
+    "siteId": "ALL",
+    "language": "ko-KR",
+    "title": "해상교통안전진단·사전컨설팅 제도 안내 및 가이드 매뉴얼(2023)",
+    "publisher": "한국해양교통안전공단",
+    "documentCode": "KOMSA 해상교통안전진단 가이드 2023",
+    "publicationDate": "2023-01-01",
+    "sourceType": "official-korean-public-agency-guide",
+    "sourceUrl": "https://www.komsa.or.kr/thumbnail/dwld/kor/sub020302_file04.pdf",
+    "sourceSha256": "77d98dd04adb9a454a7d9ed2ed07241ae6faefcfaef76b8144e3285b5389bd2e",
+    "approvedAt": "2026-07-14",
+    "approvalBasis": "AE-Sentinel project-owner request; official KOMSA PDF, readable text, and relevant rendered pages verified",
+    "applicability": "Use for mooring-safety assessment inputs and analysis methodology, not as a current emergency command procedure; current law and approved site procedures take precedence"
+  }
+}

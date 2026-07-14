@@ -1,1 +1,42 @@
-﻿{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"ResponseGuidanceV1","$comment":"Agent-Based Response Layer output. Manager-facing guidance generated via Bedrock Knowledge Base (RAG) after inference-response.v1 risk decision. Additive contract; does not change existing schemas. Confirm via contracts-change-process.","type":"object","additionalProperties":false,"required":["schemaVersion","type","traceId","eventId","generatedAt","lineId","riskLevel","guidance"],"properties":{"schemaVersion":{"const":"1.0.0"},"type":{"const":"response.guidance.generated"},"traceId":{"type":"string","minLength":1},"eventId":{"type":"string","minLength":1},"generatedAt":{"type":"string","format":"date-time"},"lineId":{"type":"string","minLength":1},"vesselId":{"type":"string"},"siteId":{"type":"string"},"riskLevel":{"type":"string","enum":["NORMAL","CAUTION","DANGER"]},"riskScore":{"type":"number","minimum":0,"maximum":1},"source":{"type":"string","enum":["KB","AGENT"]},"alertDispatched":{"type":"boolean"},"guidance":{"type":"object","additionalProperties":false,"required":["riskLevel","headline","situation","immediateActions","followupActions","citations","confidence"],"properties":{"riskLevel":{"type":"string","enum":["NORMAL","CAUTION","DANGER"]},"headline":{"type":"string","minLength":1,"maxLength":90},"situation":{"type":"string"},"immediateActions":{"type":"array","items":{"type":"string"}},"followupActions":{"type":"array","items":{"type":"string"}},"citations":{"type":"array","items":{"type":"string"}},"confidence":{"type":"string","enum":["HIGH","MEDIUM","LOW"]}}}}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ResponseGuidanceV1",
+  "$comment": "Response Guidance output only. Backend owns storage, WebSocket, SNS email and registered-recipient SMS dispatch.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "type", "traceId", "eventId", "generatedAt", "lineId",
+    "siteId", "riskLevel", "riskScore", "source", "alertDispatched", "guidance"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "type": { "const": "response.guidance.generated" },
+    "traceId": { "type": "string", "minLength": 1 },
+    "eventId": { "type": "string", "minLength": 1 },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "lineId": { "type": "string", "minLength": 1 },
+    "vesselId": { "type": ["string", "null"] },
+    "siteId": { "type": "string", "minLength": 1 },
+    "riskLevel": { "type": "string", "enum": ["NORMAL", "CAUTION", "DANGER"] },
+    "riskScore": { "type": "number", "minimum": 0, "maximum": 1 },
+    "source": { "type": "string", "const": "KB" },
+    "alertDispatched": { "const": false },
+    "guidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "riskLevel", "headline", "situation", "immediateActions",
+        "followupActions", "citations", "confidence"
+      ],
+      "properties": {
+        "riskLevel": { "type": "string", "enum": ["NORMAL", "CAUTION", "DANGER"] },
+        "headline": { "type": "string", "minLength": 1, "maxLength": 90 },
+        "situation": { "type": "string" },
+        "immediateActions": { "type": "array", "items": { "type": "string" } },
+        "followupActions": { "type": "array", "items": { "type": "string" } },
+        "citations": { "type": "array", "items": { "type": "string" } },
+        "confidence": { "type": "string", "enum": ["HIGH", "MEDIUM", "LOW"] }
+      }
+    }
+  }
+}

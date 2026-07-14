@@ -1,0 +1,19 @@
+{
+  "metadataAttributes": {
+    "approvalStatus": "approved",
+    "scope": "general",
+    "siteId": "ALL",
+    "language": "ko-KR",
+    "title": "선박설비기준 별표 21의2 - 총톤수 3,000톤 이상 선박의 계류설비 등의 요건",
+    "publisher": "대한민국 해양수산부 / 국가법령정보센터",
+    "documentCode": "해양수산부고시 제2025-227호 별표 21의2",
+    "revision": "시행 2025-12-31",
+    "publicationDate": "2025-12-31",
+    "sourceType": "official-korean-administrative-rule",
+    "sourceUrl": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000271240",
+    "sourceSha256": "d0849175d358c8296adf50f7794e9be8f18f3e6b2478f76fee2fd214aa082765",
+    "approvedAt": "2026-07-14",
+    "approvalBasis": "AE-Sentinel project-owner request; current official Korean rule and attached PDF verified",
+    "applicability": "Directly applies to ships of 3,000 gross tonnage and above under the cited standard; use only as a conservative general safety reference for other ships, and prioritize approved site procedures"
+  }
+}

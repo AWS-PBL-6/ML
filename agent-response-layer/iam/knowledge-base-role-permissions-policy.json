@@ -15,7 +15,7 @@
       ],
       "Condition": {
         "StringEquals": {
-          "aws:ResourceAccount": "762616536500"
+          "aws:ResourceAccount": "REPLACE_ACCOUNT_ID"
         }
       }
     },
@@ -35,7 +35,7 @@
       "Action": [
         "aoss:APIAccessAll"
       ],
-      "Resource": "arn:aws:aoss:ap-northeast-2:762616536500:collection/REPLACE_COLLECTION_ID"
+      "Resource": "arn:aws:aoss:ap-northeast-2:REPLACE_ACCOUNT_ID:collection/REPLACE_COLLECTION_ID"
     }
   ]
 }
