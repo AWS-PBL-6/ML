@@ -9,10 +9,10 @@
       "Action": "sts:AssumeRole",
       "Condition": {
         "StringEquals": {
-          "aws:SourceAccount": "762616536500"
+          "aws:SourceAccount": "REPLACE_ACCOUNT_ID"
         },
         "ArnLike": {
-          "aws:SourceArn": "arn:aws:bedrock:ap-northeast-2:762616536500:knowledge-base/*"
+          "aws:SourceArn": "arn:aws:bedrock:ap-northeast-2:REPLACE_ACCOUNT_ID:knowledge-base/*"
         }
       }
     }

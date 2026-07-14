@@ -1,4 +1,4 @@
 # Lambda 런타임(python3.12)에는 boto3가 기본 포함되어 있어 별도 설치가 필수는 아니다.
-# 다만 retrieve_and_generate / invoke_agent 최신 파라미터 호환을 위해
+# 다만 retrieve/converse 최신 파라미터 호환을 위해
 # 콘솔 인라인 배포가 아닌 zip 배포 시 최신 boto3를 포함하는 것을 권장한다.
 boto3>=1.34.100

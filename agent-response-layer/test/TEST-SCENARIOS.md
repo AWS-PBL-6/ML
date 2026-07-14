@@ -1,14 +1,13 @@
 # 테스트 시나리오 · 검증 절차
 
-모든 명령은 계정 `762616536500`, 리전 `ap-northeast-2`, 프로필 `ae-sentinel` 기준이다.
+모든 명령은 현재 Application 계정, 리전 `ap-northeast-2`, 프로젝트용 AWS 프로필 기준이다.
 프로필이 다르면 `--profile` 값을 바꾼다.
 
 ## 0. 준비물
 
 - 배포된 Lambda 이름: `ae-sentinel-response-guidance`
 - 생성된 Knowledge Base ID: `<KB_ID>`
-- (Agent 모드일 때) Agent ID / Alias ID
-- SNS 토픽: `arn:aws:sns:ap-northeast-2:762616536500:ae-sentinel-app-alerts` (이메일/SMS 구독 1개 이상)
+- 알림 검증은 Response Guidance Lambda 단독 테스트가 아니라 Backend 목업 경보 API에서 수행한다.
 
 ---
 
@@ -29,7 +28,7 @@ aws bedrock-agent-runtime retrieve-and-generate --region ap-northeast-2 --profil
     "type":"KNOWLEDGE_BASE",
     "knowledgeBaseConfiguration":{
       "knowledgeBaseId":"<KB_ID>",
-      "modelArn":"arn:aws:bedrock:ap-northeast-2:762616536500:inference-profile/apac.anthropic.claude-3-5-sonnet-20240620-v1:0"
+      "modelArn":"<CURRENT_ACCOUNT_INFERENCE_PROFILE_ARN>"
     }
   }'
 ```

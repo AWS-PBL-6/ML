@@ -1,0 +1,18 @@
+{
+  "metadataAttributes": {
+    "approvalStatus": "approved",
+    "scope": "general",
+    "siteId": "ALL",
+    "language": "ko-KR",
+    "title": "연안선망어업 안전보건 표준매뉴얼",
+    "publisher": "대한민국 해양수산부 / 수산업협동조합중앙회",
+    "documentCode": "연안선망어업 안전보건 표준매뉴얼 2024",
+    "publicationDate": "2024-02-20",
+    "sourceType": "official-korean-sector-safety-manual",
+    "sourceUrl": "https://www.suhyup.co.kr/bbs/suhyup/311/14647/download.do",
+    "sourceSha256": "1888fefa24410c4eaa94a798909287b8610289748e151d5bf1e78725572a1cc3",
+    "approvedAt": "2026-07-14",
+    "approvalBasis": "AE-Sentinel project-owner request; official MOF/Suhyup PDF, readable text, and relevant rendered pages verified",
+    "applicability": "Fishing-sector manual; use only its general line-break avoidance, work-stop, evacuation, and emergency-response principles, while approved port and vessel procedures take precedence"
+  }
+}

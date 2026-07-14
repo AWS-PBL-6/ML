@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ResponseGuidanceRequestV1",
+  "$comment": "Backend-confirmed risk sent to the response-guidance Lambda. The piezo raw fact is context.structuralFreqHz; AE fields are Backend-derived proxies.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "traceId", "eventId", "lineId", "siteId", "riskLevel",
+    "riskScore", "classProbabilities", "modelVersion", "features", "context"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "requestId": { "type": "string", "minLength": 1 },
+    "traceId": { "type": "string", "minLength": 1 },
+    "eventId": { "type": "string", "minLength": 1 },
+    "lineId": { "type": "string", "minLength": 1 },
+    "siteId": { "type": "string", "minLength": 1 },
+    "berthId": { "type": "string" },
+    "bollardId": { "type": ["string", "null"] },
+    "vesselId": { "type": ["string", "null"] },
+    "riskLevel": { "type": "string", "enum": ["NORMAL", "CAUTION", "DANGER"] },
+    "riskScore": { "type": "number", "minimum": 0, "maximum": 1 },
+    "classProbabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["NORMAL", "CAUTION", "DANGER"],
+      "properties": {
+        "NORMAL": { "type": "number", "minimum": 0, "maximum": 1 },
+        "CAUTION": { "type": "number", "minimum": 0, "maximum": 1 },
+        "DANGER": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "modelVersion": { "type": "string", "minLength": 1 },
+    "features": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "amplitudeDbAe": { "type": "number" },
+        "freqLowKhz": { "type": "number" },
+        "freqHighKhz": { "type": "number" },
+        "durationMs": { "type": "number" },
+        "hitCount": { "type": "number" },
+        "snrDb": { "type": "number" },
+        "signalType": { "type": "string" }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "ambientNoiseDb": { "type": "number" },
+        "rainMmh": { "type": "number" },
+        "windMps": { "type": "number" },
+        "craneActive": { "type": "number" },
+        "sensorKind": { "type": "string" },
+        "structuralFreqHz": { "type": "number" },
+        "loadRatio": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    }
+  }
+}

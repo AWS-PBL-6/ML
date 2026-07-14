@@ -1,25 +1,32 @@
 {
+  "schemaVersion": "1.0.0",
   "traceId": "trc-test-caution-0003",
   "eventId": "evt-test-caution-0003",
   "siteId": "yard-a",
+  "berthId": "berth-01",
   "lineId": "mooring-03",
   "bollardId": "bollard-03",
   "vesselId": "vessel-01",
   "riskLevel": "CAUTION",
-  "riskScore": 0.58,
+  "riskScore": 0.5086,
+  "classProbabilities": { "NORMAL": 0.0, "CAUTION": 1.0, "DANGER": 0.0 },
+  "modelVersion": "ae-port-window-xgb-v1-20260713+piezo-frequency-policy-v1",
   "features": {
-    "amplitudeDbAe": 62.4,
-    "snrDb": 18.2,
-    "hitSum": 47,
-    "hitMax": 9,
-    "nHigh": 6
+    "amplitudeDbAe": 70.94,
+    "freqLowKhz": 22.07,
+    "freqHighKhz": 163.23,
+    "durationMs": 2.23,
+    "hitCount": 15,
+    "snrDb": 34.48,
+    "signalType": "Medium amplitude"
   },
   "context": {
-    "materialType": "synthetic-rope",
-    "tensionEstimateKn": 132,
-    "temperatureC": 27.5,
-    "humidityPct": 74,
+    "ambientNoiseDb": 40.0,
+    "rainMmh": 0.0,
     "windMps": 11.2,
-    "craneActive": 1
+    "craneActive": 1,
+    "sensorKind": "piezo",
+    "structuralFreqHz": 23.5,
+    "loadRatio": 0.5086
   }
 }
