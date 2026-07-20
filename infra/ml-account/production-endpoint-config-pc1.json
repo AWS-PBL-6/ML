@@ -1,0 +1,16 @@
+{
+  "_comment": "Provisioned Concurrency 1 — 콜드스타트(~24s) 제거용 (2026-07-18 적용). 비용 약 $0.00001/초 ≈ 월 $26; 시연 종료 후 비활성화하려면 이전 구성(ae-sentinel-port-window-line-eye-20260713-cfg)으로 update-endpoint 하면 됨.",
+  "EndpointConfigName": "ae-sentinel-port-window-pc1-20260718",
+  "ProductionVariants": [
+    {
+      "VariantName": "AllTraffic",
+      "ModelName": "ae-sentinel-line-eye-xgb-20260713",
+      "InitialVariantWeight": 1.0,
+      "ServerlessConfig": {
+        "MemorySizeInMB": 3072,
+        "MaxConcurrency": 5,
+        "ProvisionedConcurrency": 1
+      }
+    }
+  ]
+}
