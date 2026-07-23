@@ -15,8 +15,8 @@ Backend → Response Guidance Lambda → Bedrock RetrieveAndGenerate → 한국 
 | 항목 | 값 |
 |---|---|
 | Lambda | `ae-sentinel-app-response-guidance` |
-| Knowledge Base | `JOCDF5OOGV` |
-| Data Source | `AM44OYKZBB` |
+| Knowledge Base | `LWEXZE8ZFE` (Amazon S3 Vectors) |
+| Data Source | `2SPLOJLAET` |
 | S3 포함 경로 | `approved/korean/` |
 | 모델 | `apac.amazon.nova-lite-v1:0` inference profile |
 
